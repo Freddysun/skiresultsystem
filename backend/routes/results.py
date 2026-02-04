@@ -3,8 +3,8 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from database import get_db
 from services.query_service import QueryService
-from schemas import QueryParams, QueryResponse, ResultResponse
-from typing import Optional, List
+from schemas import QueryParams, QueryResponse
+from typing import Optional
 from datetime import date
 import math
 
@@ -23,6 +23,7 @@ async def search_results(
     page_size: int = Query(20, ge=1, le=100, description="每页数量"),
     db: Session = Depends(get_db)
 ):
+    """查询成绩"""
     params = QueryParams(
         athlete_name=athlete_name,
         event_type=event_type,
